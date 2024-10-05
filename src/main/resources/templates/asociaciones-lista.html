@@ -131,8 +131,8 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Pais</th>
 							<th scope="col">Presidente</th>
-							<th scope="col">Editar</th>
-							<th scope="col">Eliminar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(asociaciones)}">Editar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(asociaciones)}">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -140,7 +140,7 @@
 							<td>[[ ${asociacion.nombre} ]]</td>
 							<td>[[ ${asociacion.pais} ]]</td>
 							<td>[[ ${asociacion.presidente} ]]</td>
-							<td>
+							<td th:if="${asociacion.id != null}">
 								<a class="mx-3 text-warning btn btn-dark"
 									th:href="@{/asociaciones/edit/{id}(id=${asociacion.id})}">
 									<svg width="16px" height="16px" viewBox="0 0 16 16"
@@ -150,7 +150,7 @@
 									</svg>
 								</a>
 							</td>
-							<td>
+							<td th:if="${asociacion.id != null}">
 								<a class="mx-3 text-danger btn btn-dark"
 									th:href="@{/asociaciones/delete/{id}(id=${asociacion.id})}">
 									<svg width="16px" height="16px" viewBox="0 0 16 16"

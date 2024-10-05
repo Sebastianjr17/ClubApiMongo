@@ -3,7 +3,6 @@
 
 <head>
 	<title>Entrenadores</title>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -125,7 +124,6 @@
 
 <body>
 
-
 	<main>
 		<div class="container">
 			<h1 class="text-center table-title">Registro De Entrenadores</h1>
@@ -138,8 +136,8 @@
 							<th scope="col">Apellido</th>
 							<th scope="col">Edad</th>
 							<th scope="col">Nacionalidad</th>
-							<th scope="col">Editar</th>
-							<th scope="col">Eliminar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(entrenadores)}">Editar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(entrenadores)}">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -148,13 +146,13 @@
 							<td th:text="${entrenador.apellido}"></td>
 							<td th:text="${entrenador.edad}"></td>
 							<td th:text="${entrenador.nacionalidad}"></td>
-							<td>
+							<td th:if="${not #lists.isEmpty(entrenadores)}">
 								<a class="text-warning btn btn-dark"
 									th:href="@{/entrenadores/edit/{id}(id=${entrenador.id})}">
 									<i class="fas fa-pencil-alt"></i>
 								</a>
 							</td>
-							<td>
+							<td th:if="${not #lists.isEmpty(entrenadores)}">
 								<a class="text-danger btn btn-dark"
 									th:href="@{/entrenadores/delete/{id}(id=${entrenador.id})}">
 									<i class="fas fa-trash-alt"></i>
@@ -178,6 +176,7 @@
 			</div>
 		</div>
 	</main>
+
 	<!-- Librerías pdfMake -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>

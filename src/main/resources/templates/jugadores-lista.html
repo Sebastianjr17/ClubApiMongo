@@ -133,8 +133,8 @@
 							<th scope="col">Apellido</th>
 							<th scope="col">Número</th>
 							<th scope="col">Posición</th>
-							<th scope="col">Editar</th>
-							<th scope="col">Eliminar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(jugadores)}">Editar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(jugadores)}">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>

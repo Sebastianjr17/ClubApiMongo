@@ -131,8 +131,8 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Fecha Inicial</th>
 							<th scope="col">Fecha Final</th>
-							<th scope="col">Editar</th>
-							<th scope="col">Eliminar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(competiciones)}">Editar</th>
+							<th scope="col" th:if="${not #lists.isEmpty(competiciones)}">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
