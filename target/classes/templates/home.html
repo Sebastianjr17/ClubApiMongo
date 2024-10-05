@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SportMaster</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/738/738661.png" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			font-family: 'Oswald', sans-serif;
+			height: 100%;
+			overflow-x: hidden;
+		}
+
+		.navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background-color: rgba(0, 0, 0, 0.7);
+			padding: 10px 15px;
+			z-index: 1000;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		.navbar ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			gap: 15px;
+		}
+
+		.navbar li {
+			margin: 0;
+		}
+
+		.navbar a {
+			color: #FFD700;
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+			transition: color 0.3s ease;
+		}
+
+		.navbar a:hover {
+			color: #FF4500;
+		}
+
+		.menu-toggle {
+			display: none;
+			font-size: 24px;
+			color: #FFD700;
+			background: none;
+			border: none;
+			cursor: pointer;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 20px;
+			text-align: center;
+			background-image: url('https://images5.alphacoders.com/133/thumb-1920-1338700.png');
+			background-size: cover;
+			background-position: center;
+			position: relative;
+			min-height: 100vh;
+			color: white;
+		}
+
+		.container::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 0;
+		}
+
+		.content-box {
+			position: relative;
+			z-index: 1;
+			width: 90%;
+			max-width: 1200px;
+			padding: 20px;
+			background-color: rgba(0, 0, 0, 0.6);
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+			margin-bottom: 20px;
+		}
+
+		.hero-content {
+			margin-top: 80px;
+		}
+
+		.hero-content h1 {
+			font-size: 2.5rem;
+			margin-bottom: 20px;
+		}
+
+		.hero-content p {
+			font-size: 1.125rem;
+			line-height: 1.6;
+			margin-bottom: 40px;
+		}
+
+		.features {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 20px;
+		}
+
+		.feature {
+			background-color: rgba(255, 255, 255, 0.9);
+			border-radius: 8px;
+			padding: 20px;
+			text-align: center;
+			color: #333;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+		}
+
+		.feature i {
+			font-size: 24px;
+			color: #4a90e2;
+			margin-bottom: 10px;
+		}
+
+		.feature h2 {
+			font-size: 1.25rem;
+			margin-bottom: 10px;
+		}
+
+		.feature p {
+			font-size: 0.875rem;
+			margin-bottom: 0;
+		}
+
+		@media (max-width: 599px) {
+			.menu-toggle {
+				display: block;
+			}
+
+			.navbar ul {
+				display: none;
+				flex-direction: column;
+				width: 100%;
+				align-items: center;
+				position: absolute;
+				top: 60px;
+				left: 0;
+				background: rgba(0, 0, 0, 0.9);
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+				z-index: 1001;
+			}
+
+			.navbar ul.active {
+				display: flex;
+			}
+
+			.features {
+				grid-template-columns: 1fr;
+				gap: 10px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar">
+		<button class="menu-toggle"><i class="fas fa-bars"></i></button>
+		<ul>
+			<li><a href="/entrenadores/" th:href="@{/entrenadores/}"><i class="fas fa-users"></i> Entrenadores</a></li>
+			<li><a href="/asociaciones/" th:href="@{/asociaciones/}"><i class="fas fa-handshake"></i> Asociaciones</a>
+			</li>
+			<li><a href="/competiciones/" th:href="@{/competiciones/}"><i class="fas fa-trophy"></i> Competiciones</a>
+			</li>
+			<li><a href="/jugadores/" th:href="@{/jugadores/}"><i class="fas fa-running"></i> Jugadores</a></li>
+			<li><a href="/clubes/" th:href="@{/clubes/}"><i class="fas fa-futbol"></i> Clubes</a></li>
+		</ul>
+	</nav>
+	<div class="container">
+		<div class="hero-content content-box">
+			<h1>SportMaster</h1>
+			<p>Contamos con alternativas dinámicas y entretenidas que propenden por la formación del deportista integral
+				a través de prácticas lúdicas, formativas y competitivas que contribuyen a mejorar las capacidades
+				físicas, mentales, emocionales y socio afectivas de los deportistas.</p>
+		</div>
+		<div class="features content-box">
+			<div class="feature">
+				<i class="fas fa-trophy"></i>
+				<h2>Programa</h2>
+				<p>Se viene desarrollando desde el año 2024 la enseñanza del fútbol como instrumento forjador de paz,
+					habilidades, destrezas y competencias en niños y jóvenes.</p>
+			</div>
+			<div class="feature">
+				<i class="fas fa-bullseye"></i>
+				<h2>Objetivo</h2>
+				<p>Contribuir en la formación integral de niños y jóvenes de población vulnerable a través de la
+					práctica del fútbol.</p>
+			</div>
+			<div class="feature">
+				<i class="fas fa-bolt"></i>
+				<h2>Grupo</h2>
+				<p>Niños, niñas y jóvenes que estén matriculados en algún grado de nivel de educación básica y media en
+					un establecimiento educativo en convenio con la escuela.</p>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.querySelector('.menu-toggle').addEventListener('click', function () {
+			document.querySelector('.navbar ul').classList.toggle('active');
+		});
+	</script>
+</body>
+
+</html>
