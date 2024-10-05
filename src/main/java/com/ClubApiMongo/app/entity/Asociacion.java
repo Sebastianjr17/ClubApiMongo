@@ -19,14 +19,11 @@ public class Asociacion {
 	@NotEmpty
 	private String presidente;
 
-	@NotEmpty
-	private String siglas;
-
-	//CONSTRUCTOR
+	// CONSTRUCTOR
 	public Asociacion() {
 	}
 
-	//METODOS GET y SET
+	// METODOS GET y SET
 	public String getId() {
 		return id;
 	}
@@ -57,13 +54,5 @@ public class Asociacion {
 
 	public void setPresidente(String presidente) {
 		this.presidente = presidente;
-	}
-
-	public String getSiglas() {
-		return siglas;
-	}
-
-	public void setSiglas(String siglas) {
-		this.siglas = siglas;
 	}
 }
