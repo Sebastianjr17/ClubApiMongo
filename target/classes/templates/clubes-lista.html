@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Clubes</title>
-
+	<title>Registro De Clubes</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Iconos página web -->
+	<!-- Iconos -->
 	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/738/738661.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -18,32 +17,94 @@
 	<!-- Estilos CSS -->
 	<style>
 		body {
-			background-color: #f8f9fa;
+			background-color: #f0f2f5;
 			font-family: 'Poppins', sans-serif;
+			padding: 50px;
 		}
 
-		header {
-			background-color: #343a40;
+		.form-container {
+			max-width: 100%;
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 15px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin: 0 auto;
+		}
+
+		@media(min-width: 768px) {
+			.form-container {
+				max-width: 850px;
+				padding: 50px;
+			}
+		}
+
+		.form-title {
+			font-size: 2.2rem;
+			font-weight: bold;
+			color: #343a40;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+
+		.form-group label {
+			font-weight: 500;
+			color: #495057;
+		}
+
+		.form-control {
+			border-radius: 10px;
 			padding: 10px;
+			box-shadow: none;
+			border: 1px solid #ced4da;
+			transition: all 0.3s ease;
 		}
 
-		header a.navbar-brand {
-			display: flex;
-			align-items: center;
+		.form-control:focus {
+			border-color: #80bdff;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 		}
 
-		header a.navbar-brand img {
-			height: 40px;
-			margin-right: 10px;
+		.btn-primary {
+			background-color: #007bff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 10px;
+			font-size: 1.2rem;
+			font-weight: bold;
+			transition: all 0.3s ease;
+			display: block;
+			width: 100%;
+			margin-top: 20px;
 		}
 
-		header a.navbar-brand span {
-			font-size: 24px;
+		.btn-primary:hover {
+			background-color: #0056b3;
+		}
+
+		.btn-outline-success {
+			border-radius: 10px;
+			font-size: 1.2rem;
+			margin-top: 20px;
+			width: 100%;
+			padding: 10px;
+			font-weight: bold;
+		}
+
+		.btn-outline-success:hover {
+			background-color: #28a745;
 			color: #fff;
 		}
 
-		.container {
-			margin-top: 50px;
+		.btn-group {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+
+		@media(min-width: 768px) {
+			.btn-group {
+				flex-direction: row;
+			}
 		}
 
 		.table-title {
@@ -51,6 +112,14 @@
 			font-weight: bold;
 			color: #343a40;
 			margin-bottom: 30px;
+			text-align: center;
+		}
+
+		.table-responsive {
+			background-color: #fff;
+			border-radius: 15px;
+			padding: 20px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		}
 
 		table {
@@ -65,119 +134,74 @@
 		.table td,
 		.table th {
 			text-align: center;
+			vertical-align: middle;
 		}
 
 		.btn-dark {
 			border: none;
 			color: #ffc107;
 			font-size: 16px;
+			border-radius: 50px;
 		}
 
 		.btn-dark:hover {
 			background-color: #ffc107;
 			color: #343a40;
 		}
-
-		.btn-crear {
-			font-size: 1.2rem;
-			padding: 10px 30px;
-			color: #fff;
-			background-color: #ffc107;
-			border: none;
-			border-radius: 5px;
-			font-weight: bold;
-			margin: 0 10px;
-		}
-
-		.btn-crear:hover {
-			background-color: #e0a800;
-			color: #fff;
-		}
-
-		.btn-regresar {
-			font-size: 1.2rem;
-			padding: 10px 30px;
-			color: #fff;
-			background-color: #dc3545;
-			border: none;
-			border-radius: 5px;
-			font-weight: bold;
-			margin: 0 10px;
-		}
-
-		.btn-regresar:hover {
-			background-color: #c82333;
-		}
-
-		footer {
-			margin-top: 50px;
-			background-color: #343a40;
-			padding: 20px 0;
-			text-align: center;
-			color: #fff;
-		}
 	</style>
 </head>
 
 <body>
 
-	<main>
-		<div class="container">
-			<h1 class="text-center table-title">Registro de Clubes</h1>
-
-			<div class="table-responsive">
-				<table id="clubs-table" class="table table-striped table-bordered">
-					<thead class="table-dark">
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Asociación</th>
-							<th scope="col">Entrenador</th>
-							<th scope="col">Jugadores</th>
-							<th scope="col">Competiciones</th>
-							<th scope="col" th:if="${not #lists.isEmpty(clubes)}">Editar</th>
-							<th scope="col" th:if="${not #lists.isEmpty(clubes)}">Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="club : ${clubes}">
-							<td th:text="${club.nombre}"></td>
-							<td th:text="${club.asociacion.nombre}"></td>
-							<td th:text="${club.entrenador.nombre}"></td>
-							<td>
-								<span th:each="jugador : ${club.jugador}" th:text="${jugador.name} + ', '"></span>
-							</td>
-							<td>
-								<span th:each="competicion : ${club.competicion}"
-									th:text="${competicion.nombre} + ', '"></span>
-							</td>
-							<td>
-								<a class="text-warning btn btn-dark" th:href="@{/clubes/edit/{id}(id=${club.id})}">
-									<i class="fas fa-pencil-alt"></i>
-								</a>
-							</td>
-							<td>
-								<a class="text-danger btn btn-dark" th:href="@{/clubes/delete/{id}(id=${club.id})}">
-									<i class="fas fa-trash-alt"></i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="d-flex justify-content-center mb-3">
-				<div class="p-3">
-					<button id="generate-pdf" class="btn btn-outline-primary">Generar PDF</button>
-				</div>
-				<div class="p-3">
-					<a th:href="@{/clubes/new}" class="btn btn-outline-primary">Insertar Club</a>
-				</div>
-				<div class="p-3">
-					<a th:href="@{/index}" class="btn btn-outline-success">Inicio</a>
-				</div>
-			</div>
+	<div class="container-fluid form-container">
+		<h1 class="form-title">Registro De Clubes</h1>
+		<div class="table-responsive">
+			<table id="clubs-table" class="table table-striped table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Nombre</th>
+						<th scope="col">Asociación</th>
+						<th scope="col">Entrenador</th>
+						<th scope="col">Jugadores</th>
+						<th scope="col">Competiciones</th>
+						<th scope="col" th:if="${not #lists.isEmpty(clubes)}">Editar</th>
+						<th scope="col" th:if="${not #lists.isEmpty(clubes)}">Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="club : ${clubes}">
+						<td th:text="${club.nombre}"></td>
+						<td th:text="${club.asociacion.nombre}"></td>
+						<td th:text="${club.entrenador.nombre}"></td>
+						<td>
+							<span th:each="jugador : ${club.jugador}" th:text="${jugador.name} + ', '"></span>
+						</td>
+						<td>
+							<span th:each="competicion : ${club.competicion}"
+								th:text="${competicion.nombre} + ', '"></span>
+						</td>
+						<td>
+							<a class="text-warning btn btn-dark" th:href="@{/clubes/edit/{id}(id=${club.id})}">
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+						</td>
+						<td>
+							<a class="text-danger btn btn-dark" th:href="@{/clubes/delete/{id}(id=${club.id})}">
+								<i class="fas fa-trash-alt"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-	</main>
+
+		<div class="btn-group">
+			<button id="generate-pdf" class="btn btn-primary">Generar PDF</button>
+			<a th:href="@{/clubes/new}" class="btn btn-outline-success">Insertar Club</a>
+		</div>
+
+		<a th:href="@{/index}" class="btn btn-outline-success mt-3">Volver al Inicio</a>
+	</div>
 
 	<!-- Librerías pdfMake -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>

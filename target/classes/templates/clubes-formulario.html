@@ -21,90 +21,91 @@
 		body {
 			background-color: #f8f9fa;
 			font-family: 'Poppins', sans-serif;
-		}
-
-		header {
-			background-color: #343a40;
-			padding: 10px;
-		}
-
-		header a.navbar-brand {
-			display: flex;
-			align-items: center;
-		}
-
-		header a.navbar-brand img {
-			height: 40px;
-			margin-right: 10px;
-		}
-
-		header a.navbar-brand span {
-			font-size: 24px;
-			color: #fff;
+			padding: 50px;
 		}
 
 		.form-container {
 			background-color: #fff;
 			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-			margin-top: 50px;
+			border-radius: 15px;
+			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+			margin: 0 auto;
+			max-width: 800px;
 		}
 
 		h1 {
-			font-size: 2rem;
+			font-size: 2.5rem;
 			font-weight: bold;
 			color: #343a40;
 			text-align: center;
+			margin-bottom: 30px;
 		}
 
 		label {
-			font-size: 1.1rem;
-			color: #343a40;
+			font-size: 1.2rem;
+			color: #495057;
+			font-weight: 500;
+		}
+
+		.form-control {
+			padding: 10px;
+			border-radius: 10px;
+			font-size: 1rem;
+			border: 1px solid #ced4da;
+			transition: all 0.3s ease;
+		}
+
+		.form-control:focus {
+			border-color: #80bdff;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 		}
 
 		button.btn {
-			font-size: 1.1rem;
-			padding: 10px 30px;
+			font-size: 1.2rem;
+			padding: 12px 30px;
 			color: #fff;
 			background-color: #ffc107;
 			border: none;
-			border-radius: 5px;
+			border-radius: 10px;
 			font-weight: bold;
+			transition: all 0.3s ease;
 			width: 100%;
 		}
 
 		button.btn:hover {
 			background-color: #e0a800;
-			color: #fff;
 		}
 
 		.btn-regresar {
 			font-size: 1.2rem;
-			padding: 10px 30px;
+			padding: 12px 30px;
 			color: #fff;
 			background-color: #dc3545;
-			/* Rojo */
 			border: none;
-			border-radius: 5px;
+			border-radius: 10px;
 			font-weight: bold;
-			margin-top: 15px;
-			/* Espacio entre botones */
+			transition: all 0.3s ease;
+			width: 100%;
 		}
 
 		.btn-regresar:hover {
 			background-color: #c82333;
-			/* Rojo oscuro */
+		}
+
+		.d-flex.justify-content-between {
+			margin-top: 30px;
+		}
+
+		.btn-space {
+			margin: 0 10px;
 		}
 	</style>
-
 </head>
 
 <body>
 	<main class="container">
 		<div class="form-container">
 			<h1>Registrar Club</h1>
-			<hr>
 			<form th:action="@{/clubes/save}" th:object="${club}" method="post">
 				<input type="hidden" th:field="*{id}">
 
@@ -116,7 +117,6 @@
 				<div class="form-group">
 					<label for="asociacion">Asociación:</label>
 					<select class="form-control custom-input" id="asociacion" th:field="*{asociacion}" required>
-						<option value="" disabled selected>Seleccione una Asociación</option>
 						<option th:each="asociacion : ${asociaciones}" th:value="${asociacion.id}"
 							th:text="${asociacion.nombre}"></option>
 					</select>
@@ -125,7 +125,6 @@
 				<div class="form-group">
 					<label for="entrenador">Entrenador:</label>
 					<select class="form-control custom-input" id="entrenador" th:field="*{entrenador}" required>
-						<option value="" disabled selected>Seleccione un Entrenador</option>
 						<option th:each="entrenador : ${entrenadores}" th:value="${entrenador.id}"
 							th:text="${entrenador.nombre}"></option>
 					</select>
@@ -157,17 +156,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-warning">
-						<span>Registrar</span>
+				<div class="d-flex justify-content-center">
+					<button type="submit" class="btn btn-warning btn-space">
+						Registrar
 					</button>
+					<a th:href="@{/clubes/}" class="btn btn-regresar btn-space">
+						Regresar
+					</a>
 				</div>
 			</form>
-			<div class="d-flex justify-content-center">
-				<a th:href="@{/clubes/}" class="btn btn-regresar">
-					Regresar
-				</a>
-			</div>
 		</div>
 	</main>
 

@@ -2,138 +2,139 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Registrar Entrenador</title>
+	<title>Registrar Entrenador</title>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Iconos página web -->
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/738/738661.png" type="image/x-icon">
+	<!-- Iconos página web -->
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/738/738661.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Estilos CSS -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Poppins', sans-serif;
-        }
+	<!-- Estilos CSS -->
+	<style>
+		body {
+			background-color: #f8f9fa;
+			font-family: 'Poppins', sans-serif;
+			padding: 50px;
+		}
 
-        header {
-            background-color: #343a40;
-            padding: 10px;
-        }
+		.form-container {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 15px;
+			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+			margin: 0 auto;
+			max-width: 800px;
+		}
 
-        header a.navbar-brand {
-            display: flex;
-            align-items: center;
-        }
+		h1 {
+			font-size: 2.5rem;
+			font-weight: bold;
+			color: #343a40;
+			text-align: center;
+			margin-bottom: 30px;
+		}
 
-        header a.navbar-brand img {
-            height: 40px;
-            margin-right: 10px;
-        }
+		label {
+			font-size: 1.2rem;
+			color: #495057;
+			font-weight: 500;
+		}
 
-        header a.navbar-brand span {
-            font-size: 24px;
-            color: #fff;
-        }
+		.form-control {
+			padding: 10px;
+			border-radius: 10px;
+			font-size: 1rem;
+			border: 1px solid #ced4da;
+			transition: all 0.3s ease;
+		}
 
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
+		.form-control:focus {
+			border-color: #80bdff;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+		}
 
-        h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #343a40;
-            text-align: center;
-        }
+		button.btn {
+			font-size: 1.2rem;
+			padding: 12px 30px;
+			color: #fff;
+			background-color: #ffc107;
+			border: none;
+			border-radius: 10px;
+			font-weight: bold;
+			transition: all 0.3s ease;
+			width: 100%;
+		}
 
-        label {
-            font-size: 1.1rem;
-            color: #343a40;
-        }
+		button.btn:hover {
+			background-color: #e0a800;
+		}
 
-        button.btn {
-            font-size: 1.1rem;
-            padding: 10px 30px;
-            color: #fff;
-            background-color: #ffc107;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            width: 100%;
-        }
+		.btn-regresar {
+			font-size: 1.2rem;
+			padding: 12px 30px;
+			color: #fff;
+			background-color: #dc3545;
+			border: none;
+			border-radius: 10px;
+			font-weight: bold;
+			transition: all 0.3s ease;
+			width: 100%;
+		}
 
-        button.btn:hover {
-            background-color: #e0a800;
-            color: #fff;
-        }
+		.btn-regresar:hover {
+			background-color: #c82333;
+		}
 
-        .btn-regresar {
-            font-size: 1.2rem;
-            padding: 10px 30px;
-            color: #fff;
-            background-color: #dc3545; /* Rojo */
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px; /* Espacio entre botones */
-        }
+		.d-flex.justify-content-between {
+			margin-top: 30px;
+		}
 
-        .btn-regresar:hover {
-            background-color: #c82333; /* Rojo oscuro */
-        }
-    </style>
-
+		.btn-space {
+			margin: 0 10px;
+		}
+	</style>
 </head>
-
 <body>
-    <main class="container">
-        <div class="form-container">
-            <h1>Registrar Entrenador</h1>
-            <hr>
-            <form th:action="@{/entrenadores/save}" th:object="${entrenador}" method="post">
-                <input type="hidden" th:field="*{id}">
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
-                </div>
-                <div class="form-group">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
-                </div>
-                <div class="form-group">
-                    <label for="edad">Edad:</label>
-                    <input type="number" class="form-control" id="edad" th:field="*{edad}" required>
-                </div>
-                <div class="form-group">
-                    <label for="nacionalidad">Nacionalidad:</label>
-                    <input type="text" class="form-control" id="nacionalidad" th:field="*{nacionalidad}" required>
-                </div>
-				<div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-warning">
-                        <span>Registrar</span>
-                    </button>
-                </div>
-            </form>
+	<main class="container">
+		<div class="form-container">
+			<h1>Registrar Entrenador</h1>
+			<form th:action="@{/entrenadores/save}" th:object="${entrenador}" method="post">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<label for="nombre">Nombre:</label>
+					<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+				</div>
+				<div class="form-group">
+					<label for="apellido">Apellido:</label>
+					<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
+				</div>
+				<div class="form-group">
+					<label for="edad">Edad:</label>
+					<input type="number" class="form-control" id="edad" th:field="*{edad}" required>
+				</div>
+				<div class="form-group">
+					<label for="nacionalidad">Nacionalidad:</label>
+					<input type="text" class="form-control" id="nacionalidad" th:field="*{nacionalidad}" required>
+				</div>
 
-            <div class="d-flex justify-content-center">
-                <a th:href="@{/entrenadores/}" class="btn btn-regresar">
-                    Regresar
-                </a>
-            </div>
-        </div>
-    </main>
+				<div class="d-flex justify-content-center">
+					<button type="submit" class="btn btn-warning btn-space">
+						Registrar
+					</button>
+					<a th:href="@{/entrenadores/}" class="btn btn-regresar btn-space">
+						Regresar
+					</a>
+				</div>
+			</form>
+		</div>
+	</main>
 
 </body>
 
